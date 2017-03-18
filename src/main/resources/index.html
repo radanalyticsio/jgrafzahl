@@ -13,8 +13,8 @@
 <script>
   var c3ChartDefaults = $().c3ChartDefaults();
 
-  var categories = [ '{{ categories|join('\',\'')|safe }}' ];
-  var columnsData = [ ['counts', {{ data|join(',') }} ] ];
+  var categories = [ '{{ categories }}' ];
+  var columnsData = [ ['counts', {{ data }} ] ];
 
   var horizontalBarChartConfig = $().c3ChartDefaults().getDefaultBarConfig(categories);
   horizontalBarChartConfig.bindto = '#bar-chart';
