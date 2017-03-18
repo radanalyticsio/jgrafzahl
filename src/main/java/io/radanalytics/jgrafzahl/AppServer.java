@@ -1,5 +1,6 @@
 package io.radanalytics.jgrafzahl;
 
+import java.io.*;
 import static spark.Spark.*;
 import spark.Request;
 import spark.Response;
@@ -13,18 +14,31 @@ class AppServer {
     }
 
     public void run() {
-        get("/", new IndexHandler(this.args));
+        get("/", new IndexHandler());
     }
 
     private class IndexHandler implements Route {
-        private CommandLineArgs args;
+        private String template = "";
 
-        IndexHandler(CommandLineArgs args) {
-            this.args = args;
+        IndexHandler() {
+            InputStream in = getClass().getResourceAsStream("/index.html");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line = null;
+            try {
+                while((line = reader.readLine()) != null) {
+                    this.template = this.template + "\n" + line;
+                }
+                this.template = this.template + "\n";
+                reader.close();
+            }
+            catch (IOException ex) {
+                System.err.println("Unexpected error: " + ex.getMessage());
+                this.template = "";
+            }
         }
 
         public Object handle(Request req, Response res) throws Exception {
-            return "servers: " + this.args.getServers() + "\ntopic: " + this.args.getTopic();
+            return this.template;
         }
     }
 }
