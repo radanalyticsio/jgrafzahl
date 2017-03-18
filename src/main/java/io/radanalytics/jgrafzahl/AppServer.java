@@ -5,20 +5,26 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
-public class AppServer {
-    private String[] args;
+class AppServer {
+    private CommandLineArgs args;
 
     AppServer(String[] args) {
-        this.args = args;
+        this.args = new CommandLineArgs(args);
     }
 
     public void run() {
-        get("/", new IndexHandler());
+        get("/", new IndexHandler(this.args));
     }
 
     private class IndexHandler implements Route {
+        private CommandLineArgs args;
+
+        IndexHandler(CommandLineArgs args) {
+            this.args = args;
+        }
+
         public Object handle(Request req, Response res) throws Exception {
-            return "Hello";
+            return "servers: " + this.args.getServers() + "\ntopic: " + this.args.getTopic();
         }
     }
 }
