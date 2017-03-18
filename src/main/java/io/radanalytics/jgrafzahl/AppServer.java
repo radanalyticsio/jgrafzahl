@@ -7,32 +7,23 @@ import static spark.Spark.*;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import com.hubspot.jinjava.Jinjava;
 
 class AppServer {
     private CommandLineArgs args;
+    private DataProvider provider;
 
     AppServer(String[] args) {
         this.args = new CommandLineArgs(args);
-        get("/", new IndexHandler());
-    }
-
-    private String stringJoin(String[] strings, String delimeter) {
-        String cat = "";
-        for (String s: strings) {
-            if (cat == "") {
-                cat = s;
-            } else {
-                cat = cat + delimeter + s;
-            }
-        }
-        return cat;
+        this.provider = new DataProvider(); 
+        get("/", new IndexHandler(provider));
     }
 
     private class IndexHandler implements Route {
         private String template = "";
+        private DataProvider provider;
 
-        IndexHandler() {
+        IndexHandler(DataProvider provider) {
+            this.provider = provider;
             InputStream in = getClass().getResourceAsStream("/index.html");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line = null;
@@ -50,11 +41,9 @@ class AppServer {
         }
 
         public Object handle(Request req, Response res) throws Exception {
-            String[] categories = {"foo", "bar"};
-            String[] counts = {"10", "20"};
             return this.template
-                .replace("{{ categories }}", stringJoin(categories, "\',\'"))
-                .replace("{{ data }}", stringJoin(counts, ","));
+                .replace("{{ categories }}", this.provider.getCategories())
+                .replace("{{ data }}", this.provider.getData());
         }
     }
 }
