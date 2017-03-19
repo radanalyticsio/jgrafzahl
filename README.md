@@ -10,7 +10,7 @@ run with spark
 
 ```
 $ spark-submit --class io.radanalytics.jgrafzahl.App \
-               --packages com.sparkjava:spark-core:2.5.5 \
+               --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5 \
                target/jgrafzahl-1.0-SNAPSHOT.jar
 ```
 
