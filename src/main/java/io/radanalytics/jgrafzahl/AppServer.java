@@ -4,7 +4,8 @@ import static spark.Spark.*;
 
 class AppServer {
     AppServer(String[] args) {
-        DataProvider provider = new DataProvider(); 
+        DataProvider provider = new DataProvider();
         get("/", new IndexHandler(provider));
+        get("/data", new DataHandler(provider));
     }
 }

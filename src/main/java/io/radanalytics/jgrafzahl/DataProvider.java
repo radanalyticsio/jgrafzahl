@@ -3,7 +3,7 @@ package io.radanalytics.jgrafzahl;
 class DataProvider {
     public String getCategories() {
         String[] categories = {"foo", "bar"};
-        return stringJoin(categories, "\',\'");
+        return stringJoin(categories, "\",\"");
     }
 
     public String getData() {
