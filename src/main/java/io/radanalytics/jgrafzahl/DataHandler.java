@@ -24,15 +24,16 @@ class DataHandler implements Route {
             num = Integer.parseInt(numparam);
         }
 
+        /* this does not work, was trying to dump out the raw lines to see
+         * the format for the Row objects.
         String ret = "";
         for (Row r: this.provider.getTop(num)) {
-            ret = ret += r.mkString("::") + "\n";
+            ret = ret + r.mkString("::") + "\n";
         }
         return ret;
-        /*
+        */
         return this.template
             .replace("{{ categories }}", this.provider.getCategories(num))
             .replace("{{ data }}", this.provider.getData(num));
-            */
     }
 }
