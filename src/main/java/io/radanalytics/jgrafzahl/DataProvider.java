@@ -1,9 +1,14 @@
 package io.radanalytics.jgrafzahl;
 
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+import org.apache.spark.sql.*;
 
 class DataProvider {
-    DataProvider(CommandLineArgs args) {
+    private SparkSession spark;
+
+    DataProvider(SparkSession spark) {
+        this.spark = spark;
     }
 
     public String getCategories(int num) {
@@ -14,6 +19,12 @@ class DataProvider {
     public String getData(int num) {
         String[] counts = {"10", "20"};
         return stringJoin(Arrays.copyOfRange(counts, 0, num), ",");
+    }
+
+    public List<Row> getTop(int num) {
+        String query = "SELECT * FROM results ORDER BY count DESC LIMIT " + Integer.toString(num);
+        List<Row> results = this.spark.sql(query).collectAsList();
+        return results;
     }
 
     private String stringJoin(String[] strings, String delimeter) {

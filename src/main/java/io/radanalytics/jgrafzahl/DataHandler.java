@@ -6,6 +6,7 @@ import java.util.Map;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import org.apache.spark.sql.*;
 
 class DataHandler implements Route {
     private DataProvider provider;
@@ -23,8 +24,15 @@ class DataHandler implements Route {
             num = Integer.parseInt(numparam);
         }
 
+        String ret = "";
+        for (Row r: this.provider.getTop(num)) {
+            ret = ret += r.mkString("::") + "\n";
+        }
+        return ret;
+        /*
         return this.template
             .replace("{{ categories }}", this.provider.getCategories(num))
             .replace("{{ data }}", this.provider.getData(num));
+            */
     }
 }
