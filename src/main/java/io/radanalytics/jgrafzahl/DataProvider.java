@@ -1,14 +1,19 @@
 package io.radanalytics.jgrafzahl;
 
+import java.util.Arrays;
+
 class DataProvider {
-    public String getCategories() {
-        String[] categories = {"foo", "bar"};
-        return stringJoin(categories, "\",\"");
+    DataProvider(CommandLineArgs args) {
     }
 
-    public String getData() {
+    public String getCategories(int num) {
+        String[] categories = {"foo", "bar"};
+        return stringJoin(Arrays.copyOfRange(categories, 0, num), "\",\"");
+    }
+
+    public String getData(int num) {
         String[] counts = {"10", "20"};
-        return stringJoin(counts, ",");
+        return stringJoin(Arrays.copyOfRange(counts, 0, num), ",");
     }
 
     private String stringJoin(String[] strings, String delimeter) {

@@ -31,7 +31,7 @@ class IndexHandler implements Route {
 
     public Object handle(Request req, Response res) throws Exception {
         return this.template
-            .replace("{{ categories }}", this.provider.getCategories())
-            .replace("{{ data }}", this.provider.getData());
+            .replace("{{ categories }}", this.provider.getCategories(1))
+            .replace("{{ data }}", this.provider.getData(1));
     }
 }
