@@ -45,7 +45,7 @@ with two changes.
    ```bash
    oc new-app --template=oshinko-java-spark-build-dc \
               -p APPLICATION_NAME=jgrafzahl \
-              -p GIT_URI=https://github.com/elmiko/jgrazfahl \
+              -p GIT_URI=https://github.com/elmiko/jgrafzahl \
               -p APP_ARGS='apache-kafka:9092 word-fountain' \
               -p SPARK_OPTIONS='--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5'
    ```
