@@ -22,6 +22,8 @@ class DataProvider {
     }
 
     public List<Row> getTop(int num) {
+        /* This does not work and needs some love, eventually we'll need to 
+         * return the values and counts we are looking for. */
         String query = "SELECT * FROM results ORDER BY count DESC LIMIT " + Integer.toString(num);
         List<Row> results = this.spark.sql(query).collectAsList();
         return results;
