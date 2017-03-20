@@ -21,7 +21,7 @@ class DataHandler implements Route {
         String numparam = req.queryParams("n");
         int num = 1;
         System.out.println("query params = " + numparam);
-        if (numparam != null {
+        if (numparam != null) {
             num = Integer.parseInt(numparam);
         }
 
