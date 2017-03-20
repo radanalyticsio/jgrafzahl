@@ -20,8 +20,10 @@ class AppServer {
                  .format("memory")
                    .queryName("results")
              .start();
-            
+
         DataProvider provider = new DataProvider(spark);
+        // setup http server
+        port(8080);
         get("/", new IndexHandler(provider));
         get("/data", new DataHandler(provider));
     }
