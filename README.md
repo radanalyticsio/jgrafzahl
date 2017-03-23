@@ -34,20 +34,15 @@ This application is meant to be used as a Java based drop-in replacement for
 the python [Graf Zahl](https://github.com/mattf/grafzahl) application. It can
 be used in conjunction with the
 [radanalytics.io Graf Zahl tutorial](http://radanalytics.io/applications/grafzahl)
-with two changes.
+with one change.
 
-1. Install the Java s2i deployment template
-   ```bash
-   oc create -f https://raw.githubusercontent.com/radanalyticsio/oshinko-s2i/master/java/javabuilddc.json
-   ```
-
-2. Change the command to install the application
+1. Change the command to install the application
    ```bash
    oc new-app --template=oshinko-java-spark-build-dc \
               -p APPLICATION_NAME=jgrafzahl \
               -p GIT_URI=https://github.com/elmiko/jgrafzahl \
               -p APP_MAIN_CLASS=io.radanalytics.jgrafzahl.App \
               -p APP_ARGS='apache-kafka:9092 word-fountain' \
-              -p SPARK_OPTIONS='--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5'
+              -p SPARK_OPTIONS='--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5  --conf spark.jars.ivy=/tmp/.ivy2'
    ```
 
