@@ -1,8 +1,7 @@
 package io.radanalytics.jgrafzahl;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -30,8 +29,10 @@ class IndexHandler implements Route {
     }
 
     public Object handle(Request req, Response res) throws Exception {
+        int count = 10;
+        List<Object> top = this.provider.getTop(count);
         return this.template
-            .replace("{{ categories }}", this.provider.getCategories(1))
-            .replace("{{ data }}", this.provider.getData(1));
+            .replace("{{ categories }}", this.provider.getCategoriesFrom(top))
+            .replace("{{ data }}", this.provider.getDataFrom(top));
     }
 }
