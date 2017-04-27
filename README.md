@@ -20,7 +20,7 @@ a java implementation of the [Graf Zahl](https://github.com/mattf/grafzahl).
 1. Run the app
    ```bash
    spark-submit --class io.radanalytics.jgrafzahl.App \
-                --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5 \
+                --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5,org.glassfish:javax.json:1.0.4 \
                 target/jgrafzahl-1.0-SNAPSHOT.jar
    ```
 
@@ -43,6 +43,6 @@ with one change.
               -p GIT_URI=https://github.com/elmiko/jgrafzahl \
               -p APP_MAIN_CLASS=io.radanalytics.jgrafzahl.App \
               -p APP_ARGS='apache-kafka:9092 word-fountain' \
-              -p SPARK_OPTIONS='--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5  --conf spark.jars.ivy=/tmp/.ivy2'
+              -p SPARK_OPTIONS='--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5,org.glassfish:javax.json:1.0.4  --conf spark.jars.ivy=/tmp/.ivy2'
    ```
 
