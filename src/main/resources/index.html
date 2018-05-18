@@ -38,7 +38,7 @@ $(function() {
     $.ajax({
         url: updateUrl,
         dataType: "json",
-    }).success(function(jsonData){
+    }).done(function(jsonData){
       var horizontalBarChartConfig = $().c3ChartDefaults().getDefaultBarConfig(jsonData['categories']);
       horizontalBarChartConfig.bindto = '#bar-chart';
       horizontalBarChartConfig.axis = {
