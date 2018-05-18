@@ -2,33 +2,7 @@
 
 a java implementation of the [Graf Zahl](https://github.com/mattf/grafzahl).
 
-## Quick start
-
-1. Build application jar
-   ```bash
-   mvn package
-   ```
-
-1. Get a copy of Apache Spark (requires 2.1.0+)
-   ```bash
-   mkdir spark
-   curl https://www.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz | tar zx -C spark --strip-components=1
-   ```
-
-1. [Setup Apache Kafka](https://kafka.apache.org/documentation.html#quickstart)
-
-1. Run the app
-   ```bash
-   spark-submit --class io.radanalytics.jgrafzahl.App \
-                --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.0,com.sparkjava:spark-core:2.5.5,org.glassfish:javax.json:1.0.4 \
-                target/jgrafzahl-1.0-SNAPSHOT.jar
-   ```
-
-1. [Connect to the app](http://127.0.0.1:8080)
-
-1. Publish some words to topic `word-fountain`
-
-## OpenShift start
+## OpenShift quickstart
 
 This application is meant to be used as a Java based drop-in replacement for
 the python [Graf Zahl](https://github.com/mattf/grafzahl) application. It can
